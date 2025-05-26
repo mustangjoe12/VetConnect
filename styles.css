@@ -1,0 +1,41 @@
+/* styles.css for VetConnect */
+
+/* Reset some basic styling */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Container to center content */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header and footer styling */
+.header, .footer {
+  background-color: #3498db;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Navigation styling */
+nav a {
+  margin: 0 10px;
+  color: #3498db;
+  text-decoration: none;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+  
+  nav a {
+    display: block;
+    margin: 5px 0;
+  }
+}
