@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>VetConnect</title>
     <link rel="stylesheet" href="styles.css" />
-    <!-- Vue 3 (CDN) -->
-    <script src="https://unpkg.com/vue@3"></script>
     <!-- Axios (for making API calls) -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  </head>
-  <body>
-    <div id="app">
-      <!-- Show Login if not logged in, otherwise show Dashboard -->
-      <login-component v-if="!loggedIn" @login-success="doLogin"></login-component>
-      <dashboard-component v-if="loggedIn"></dashboard-component>
-    </div>
+</head>
+<body>
+<div id="app">
+    <!-- When not logged in, show either the login or the registration view -->
+    <login-component
+            v-if="!loggedIn && !showRegister"
+            @login-success="handleLogin"
+            @show-register="toggleRegister"
+    ></login-component>
+    <create-user-component
+            v-if="!loggedIn && showRegister"
+            @registration-success="handleRegistrationSuccess"
+            @show-login="toggleRegister"
+    ></create-user-component>
+    <!-- When logged in, show the dashboard -->
+    <dashboard-component v-if="loggedIn"></dashboard-component>
+</div>
 
-    <!-- Main Vue application script -->
-    <script src="app.js"></script>
-  </body>
+<!-- Main Vue application script -->
+<script type="module" src="app.js"></script>
+</body>
 </html>
