@@ -1,8 +1,9 @@
-// server.js
+// server.cjs
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-require('dotenv').config();
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,22 +14,21 @@ app.use(express.json());
 
 // Connect to MongoDB (adjust the connection string as needed)
 mongoose
-  .connect(process.env.MONGO_URI || 'mongodb://localhost:27017/vetconnect', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => console.log('MongoDB connected...'))
-  .catch((err) => {
-    console.error(err.message);
-    process.exit(1);
-  });
-
-// Example route: Health check
+    .connect(process.env.MONGO_URI || 'mongodb://localhost:27017/vetconnect', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    })
+    .then(() => console.log('MongoDB connected...'))
+    .catch((err) => {
+      console.error(err.message);
+      process.exit(1);
+    });
+// Health Check Route
 app.get('/api', (req, res) => {
   res.json({ message: 'Welcome to VetConnect API' });
 });
 
-// Example route: Get appointments (for demonstration)
+// Appointments Route (for demonstration)
 app.get('/api/appointments', (req, res) => {
   // In a full implementation, fetch appointments from the database.
   res.json([
@@ -37,8 +37,18 @@ app.get('/api/appointments', (req, res) => {
   ]);
 });
 
-// (Additional routes for authentication, pet records, etc., would be added here)
+/*
+  Note: To enable authentication in VetConnect, you should add routes for:
+    - POST /api/auth/register
+    - POST /api/auth/login
+  You can implement these routes here (or in separate router modules) to handle:
+    - Validating registration data
+    - Hashing passwords (server‑side using bcrypt or similar)
+    - Creating user records in MongoDB
+    - Issuing tokens (e.g., JWT) upon successful login
+*/
 
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
